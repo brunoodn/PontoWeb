@@ -1,0 +1,60 @@
+﻿@model List<FuncionarioModel>
+
+@{
+    ViewData["Title"] = "Lista de funcionarios";
+}
+
+<h2>Lista de funcionarios</h2>
+
+@if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemSucesso"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+<br />
+<div>
+    <a asp-controller="Funcionario" asp-action="Criar" class="btn btn-primary">Adicionar Funcionario</a>
+</div>
+<br />
+<table id="table-funcionarios" class="table">
+  <thead>
+    <tr>
+      <th scope="col">Matricula</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Perfil</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+        @if(Model != null && Model.Any())
+        {
+            @foreach(FuncionarioModel funcionario in Model)
+            {
+                <tr>
+                  <th scope="row">@funcionario.Matricula</th>
+                  <td>@funcionario.Nome</td>
+                  <td>@funcionario.CPF</td>
+                  <td>@funcionario.Tipo</td>
+                  <td>
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                      <a asp-controller="Funcionario" asp-action="Editar" asp-route-matricula="@funcionario.Matricula" role="button" class="btn btn-primary">Editar</a>
+                      <a asp-controller="Funcionario" asp-action="ConfirmarExclusao" asp-route-matricula="@funcionario.Matricula" role="button" class="btn btn-danger">Remover</a>
+                    </div>
+                  </td>
+                </tr>
+            }
+        }
+        else
+            {
+                <tr >
+                    <td class="text-center" colspan="5">Não existe funcionarios</td>
+                </tr>
+            }
+
+  </tbody>
+</table>
+
+
+

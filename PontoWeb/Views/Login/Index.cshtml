@@ -1,0 +1,35 @@
+﻿@model LoginModel
+
+@{
+    Layout = "_LayoutDeslogada";
+    ViewData["Title"] = "Pagina de Login";
+}
+
+@if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemSucesso"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+@if(TempData["MensagemErro"] != null){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemErro"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+<form method="post" asp-controller="Login" asp-action="Entrar">
+  <div class="mb-3">
+    <label for="matricula" class="form-label">Matricula</label>
+    <input  asp-for="Matricula" type="text" class="form-control" id="matricula" >
+    @Html.ValidationMessageFor(l => l.Matricula)
+  </div>
+  <div class="mb-3">
+    <label for="senha" class="form-label">Senha</label>
+    <input asp-for="Senha" type="password" class="form-control" id="senha">
+    @Html.ValidationMessageFor(l => l.Senha)
+  </div>
+
+  <button type="submit" class="btn btn-primary">Entrar</button>
+</form>

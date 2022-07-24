@@ -1,0 +1,38 @@
+﻿@model List<BatidaModel>
+@{
+    ViewData["Title"] = "Minhas batidas";
+}
+
+<h2>Minhas batidas</h2>
+
+<table id="table-batidas" class="table">
+  <thead>
+    <tr>
+      <th scope="col">Matricula</th>
+      <th scope="col">Dia</th>
+      <th scope="col">Horaio</th>
+      <th scope="col">Observação</th>
+    </tr>
+  </thead>
+  <tbody>
+        @if(Model != null && Model.Any())
+        {
+            @foreach (BatidaModel batida in Model)
+            {
+                <tr>
+                  <th scope="row">@batida.MatriculaEmpregado</th>
+                  <td>@batida.Registro.ToString("dd/MM") @(batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado? "*" : "")</td>
+                  <td>@batida.Registro.ToString("HH:mm")</td>
+                  <td>@batida.Observacao</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr >
+                <td colspan="5" class="text-center">Nao existe batidas nesse mês..</td>
+            </tr>
+        }
+
+  </tbody>
+</table>

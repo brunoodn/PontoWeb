@@ -1,0 +1,27 @@
+﻿@model FuncionarioModel
+@{
+    ViewData["Title"] = "Home Page";
+    
+}
+@if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemSucesso"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+@if(TempData["MensagemErro"] != null){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemErro"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem Vindo ao PontoWeb</h1>
+    
+    <p id="time"></p>
+    <a asp-controller="Batida" asp-action="RegistrarBatida" asp-route-matricula="@Model.Matricula" class="btn btn-primary">Registrar Ponto</a>
+</div>
+
+
