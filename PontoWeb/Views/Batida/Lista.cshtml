@@ -1,0 +1,57 @@
+﻿@model List<BatidaModel>
+
+@{
+    ViewData["Title"] = "Listagem de batidas";
+}
+
+<h2>Listagem de batidas</h2>
+@if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemSucesso"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+@if(TempData["MensagemErro"] != null){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemErro"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+<hr />
+<table id="table-batidas" class="table">
+    <thead>
+        <tr>
+            <th>Matricula</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            @foreach (var batida in Model)
+            {
+                <tr>
+                    <td>@batida.MatriculaEmpregado</td>
+                    <td>@batida.Registro.ToString("dd/MM/yyyy")  @(batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado? "*" : "")</td>
+                    <td>@batida.Registro.ToString("HH:mm") </td>
+                    <td>
+                        <a asp-controller="Batida" asp-action="Editar" asp-route-id="@batida.Id" class="btn btn-primary">Editar</a>
+                        <a asp-controller="Batida" asp-action="ConfirmarExclusao" asp-route-id="@batida.Id" class="btn btn-danger">Remover</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-center" colspan="4">não existem batidas..</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

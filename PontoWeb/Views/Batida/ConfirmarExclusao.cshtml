@@ -1,0 +1,11 @@
+﻿@model BatidaModel
+@{
+    ViewData["Title"] = "Remover batida";
+}
+
+<h2>Removendo batida</h2>
+<hr />
+<p>Deseja realmente exclui a batida ?</p>
+
+<a asp-controller="Batida" asp-action="Lista" class="btn btn-primary">Voltar</a>
+<a asp-controller="Batida" asp-action="Remover" asp-route-id="@Model.Id" class="btn btn-danger">Remover</a>

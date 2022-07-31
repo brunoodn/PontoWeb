@@ -19,12 +19,28 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx0ZXJhclNlbmhhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/ConfirmarExclusao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXENvbmZpcm1hckV4Y2x1c2FvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXENyaWFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/Lista.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXExpc3RhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Batida/MinhasBatidas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmF0aWRhXE1pbmhhc0JhdGlkYXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Bruno/apps/MeusProjetos/PontoWeb/PontoWeb/Views/Funcionario/ConfirmarExclusao.cshtml]

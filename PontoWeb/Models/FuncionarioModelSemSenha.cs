@@ -11,7 +11,7 @@ namespace PontoWeb.Models
         [Required(ErrorMessage = "Campo Obrigatório..")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
-        public string CPF { get; set; }
+        public string NIS { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
         public TipoFuncionarioEnum Tipo { get; set; }
 

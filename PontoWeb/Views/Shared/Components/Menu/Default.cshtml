@@ -10,7 +10,7 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Página inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Batida" asp-action="Index">Minhas Batidas</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Batida" asp-action="MinhasBatidas">Minhas Batidas</a>
             </li>
 
         @if (Model.Tipo == PontoWeb.Enums.TipoFuncionarioEnum.Supervisor)
@@ -19,7 +19,7 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionarios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Batida" asp-action="Criar">Gerenciar Batidas</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Batida" asp-action="Index">Gerenciar Batidas</a>
             </li>
         }
 

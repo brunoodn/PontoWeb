@@ -19,9 +19,9 @@
     @Html.ValidationMessageFor(f => f.Nome)
   </div>
     <div class="mb-3">
-    <label for="cpf" class="form-label">CPF</label>
-    <input asp-for="CPF" type="text" class="form-control" id="cpf" >
-    @Html.ValidationMessageFor(f => f.CPF)
+    <label for="nis" class="form-label">NIS</label>
+    <input asp-for="NIS" type="text" class="form-control" id="nis" >
+    @Html.ValidationMessageFor(f => f.NIS)
   </div>
   <div class="mb-3">
     <label for="perfil" class="form-label">Perfil</label>
@@ -33,5 +33,6 @@
     @Html.ValidationMessageFor(f => f.Tipo)
   </div>
   <button type="submit" class="btn btn-primary">Atualizar</button>
+  <a asp-controller="Funcionario" asp-action="Index" class="btn btn-warning">Voltar</a>
 </form>
 

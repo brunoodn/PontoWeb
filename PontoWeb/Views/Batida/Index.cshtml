@@ -1,38 +1,47 @@
-﻿@model List<BatidaModel>
+﻿@model BatidaPorDataModel
 @{
-    ViewData["Title"] = "Minhas batidas";
+    ViewData["Title"] = "Gerenciamento de batidas";
 }
 
-<h2>Minhas batidas</h2>
+<h1>Gerenciamento de batidas</h1>
 
-<table id="table-batidas" class="table">
-  <thead>
-    <tr>
-      <th scope="col">Matricula</th>
-      <th scope="col">Dia</th>
-      <th scope="col">Horaio</th>
-      <th scope="col">Observação</th>
-    </tr>
-  </thead>
-  <tbody>
-        @if(Model != null && Model.Any())
-        {
-            @foreach (BatidaModel batida in Model)
-            {
-                <tr>
-                  <th scope="row">@batida.MatriculaEmpregado</th>
-                  <td>@batida.Registro.ToString("dd/MM") @(batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado? "*" : "")</td>
-                  <td>@batida.Registro.ToString("HH:mm")</td>
-                  <td>@batida.Observacao</td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr >
-                <td colspan="5" class="text-center">Nao existe batidas nesse mês..</td>
-            </tr>
-        }
+@if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemSucesso"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
 
-  </tbody>
-</table>
+@if(TempData["MensagemErro"] != null){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemErro"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+<br />
+<br />
+
+<a class="btn btn-primary" asp-controller="Batida" asp-action="Criar">Adicionar batida</a>
+<a class="btn btn-primary" asp-controller="Batida" asp-action="Lista">Listar batidas</a>
+
+<br />
+
+<hr />
+
+<h2>Exportar batidas</h2>
+
+<form asp-controller="Batida" asp-action="ExportarBatidas">
+    <div class="mb-3">
+        <label for="dtInicial">Data inicial</label>
+        <input asp-for="DataInicial" id="dtinicial" class="form-control" type="date" />
+        @Html.ValidationMessageFor(d => d.DataInicial)
+    </div>
+    <div class="mb-3">
+        <label for="dtFinal">Data Final</label>
+        <input asp-for="DataFinal" id="dtFinal" class="form-control" type="date" />
+        @Html.ValidationMessageFor(d => d.DataFinal)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Exportar</button>
+</form>

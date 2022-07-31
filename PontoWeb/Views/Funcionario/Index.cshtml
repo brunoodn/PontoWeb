@@ -12,6 +12,14 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 }
+
+@if(TempData["MensagemErro"] != null){
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>@TempData["MensagemErro"]</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
 <br />
 <div>
     <a asp-controller="Funcionario" asp-action="Criar" class="btn btn-primary">Adicionar Funcionario</a>
@@ -22,7 +30,7 @@
     <tr>
       <th scope="col">Matricula</th>
       <th scope="col">Nome</th>
-      <th scope="col">CPF</th>
+      <th scope="col">NIS</th>
       <th scope="col">Perfil</th>
       <th scope="col"></th>
     </tr>
@@ -35,7 +43,7 @@
                 <tr>
                   <th scope="row">@funcionario.Matricula</th>
                   <td>@funcionario.Nome</td>
-                  <td>@funcionario.CPF</td>
+                  <td>@funcionario.NIS</td>
                   <td>@funcionario.Tipo</td>
                   <td>
                       <div class="btn-group" role="group" aria-label="Basic example">

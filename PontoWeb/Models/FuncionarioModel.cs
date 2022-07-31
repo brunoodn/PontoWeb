@@ -12,9 +12,13 @@ namespace PontoWeb.Models
         [Required(ErrorMessage = "Campo Obrigatório..")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
+
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Minimo 6 caracteres para a senha.")]
         public string Senha { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
-        public string CPF { get; set; }
+        
+        [StringLength(12,MinimumLength = 12, ErrorMessage = "O NIS deve conter 12 caracteres. caso o seu nao tenha coloque um zero no começo.")]
+        public string NIS { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
         public TipoFuncionarioEnum Tipo { get; set; }
 

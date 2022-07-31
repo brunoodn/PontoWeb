@@ -1,8 +1,12 @@
 ﻿@model BatidaModel
 @{
-    ViewData["Title"] = "Ajustando batida";
+    ViewData["Title"] = "Editando batida";
 }
-<h2>Adicionar batidas</h2>
+
+<h2>Editando batida</h2>
+<br />
+
+
 @if(TempData["MensagemSucesso"] != null){
     <div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>@TempData["MensagemSucesso"]</strong>
@@ -16,8 +20,9 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 }
-
-<form method="post" asp-controller="Batida" asp-action="AjustarBatida">
+<hr />
+<form method="post" asp-controller="Batida" asp-action="Atualizar">
+  <input type="hidden" asp-for="Id" />
   <div class="mb-3">
     <label for="matricula" class="form-label">Matricula</label>
     <input asp-for="MatriculaEmpregado" type="text" class="form-control" id="matricula" >
@@ -35,6 +40,7 @@
     @Html.ValidationMessageFor(b => b.Observacao)
   </div>
 
-  <button type="submit" class="btn btn-primary">Adicionar</button>
+  <button type="submit" class="btn btn-primary">Atualizar</button>
   <a asp-controller="Batida" asp-action="Index" class="btn btn-warning">Voltar</a>
 </form>
+

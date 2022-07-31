@@ -12,8 +12,8 @@ using PontoWeb.Data;
 namespace PontoWeb.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20220723221805_CriandoFuncionarioEBatidas")]
-    partial class CriandoFuncionarioEBatidas
+    [Migration("20220730195343_CreateFuncionarioBatidas")]
+    partial class CreateFuncionarioBatidas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace PontoWeb.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2");
@@ -69,15 +72,16 @@ namespace PontoWeb.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NIS")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -85,7 +89,8 @@ namespace PontoWeb.Migrations
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Tipo")
                         .HasColumnType("int");

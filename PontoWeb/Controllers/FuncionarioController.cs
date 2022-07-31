@@ -32,14 +32,16 @@ namespace PontoWeb.Controllers
             if (ModelState.IsValid)
             {
                 FuncionarioModel funcionarioDb = _funcionarioRepositorio.BuscarPorMatricula(funcionario.Matricula);
+                string funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
 
-                if(funcionarioDb == null)
+
+                if (funcionarioDb == null && funcionarioNIS == null)
                 {
                     _funcionarioRepositorio.Adicionar(funcionario);
                     TempData["MensagemSucesso"] = "Funcionario criado com sucesso..";
                     return RedirectToAction("Index");
                 }
-                TempData["MensagemErro"] = "Matricula já existe..";
+                TempData["MensagemErro"] = "Matricula ou NIS já existe..";
                 return View();
 
             }
@@ -87,19 +89,28 @@ namespace PontoWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                funcionarioDB.Matricula = funcionario.Matricula;
-                funcionarioDB.Nome = funcionario.Nome;
-                funcionarioDB.CPF = funcionario.CPF;
-                funcionarioDB.Tipo = funcionario.Tipo;
-                funcionarioDB.Senha = funcionarioDB.Senha;
-                funcionarioDB.DataCriacao = funcionarioDB.DataCriacao;
-                funcionarioDB.DataAtualizacao = DateTime.Now;
-                funcionarioDB.Ativo = funcionarioDB.Ativo;
+                FuncionarioModel funcionarioDb = _funcionarioRepositorio.BuscarPorMatricula(funcionario.Matricula);
+                string funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
 
-                _funcionarioRepositorio.Atualizar(funcionarioDB);
-                TempData["MensagemSucesso"] = "Funcionario atualizado com sucesso";
 
-                return RedirectToAction("Index");
+                if (funcionarioDb == null && funcionarioNIS == null)
+                {
+                    funcionarioDB.Matricula = funcionario.Matricula;
+                    funcionarioDB.Nome = funcionario.Nome;
+                    funcionarioDB.NIS = funcionario.NIS;
+                    funcionarioDB.Tipo = funcionario.Tipo;
+                    funcionarioDB.Senha = funcionarioDB.Senha;
+                    funcionarioDB.DataCriacao = funcionarioDB.DataCriacao;
+                    funcionarioDB.DataAtualizacao = DateTime.Now;
+                    funcionarioDB.Ativo = funcionarioDB.Ativo;
+
+                    _funcionarioRepositorio.Atualizar(funcionarioDB);
+                    TempData["MensagemSucesso"] = "Funcionario atualizado com sucesso";
+
+                    return RedirectToAction("Index");
+                }
+                TempData["MensagemErro"] = "Matricula ou NIS já existe..";
+                return View();
             }
             return View(funcionario);
         }

@@ -32,6 +32,18 @@ namespace PontoWeb.Repositorio
         {
             return _bancoContext.Funcionarios.FirstOrDefault(f => f.Matricula == matricula);
         }
+        public string BuscaNIS(int matricula)
+        {
+            FuncionarioModel funcionario = _bancoContext.Funcionarios.FirstOrDefault(f => f.Matricula == matricula);
+
+            return funcionario.NIS;
+        }
+        public string BuscaPorNIS(string nis)
+        {
+            FuncionarioModel funcionario = _bancoContext.Funcionarios.FirstOrDefault(f => f.NIS == nis);
+
+            return funcionario.NIS;
+        }
 
         public List<FuncionarioModel> BuscarTodos()
         {
