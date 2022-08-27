@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PontoWeb.Data;
 using PontoWeb.Filters;
 using PontoWeb.Helpers;
 using PontoWeb.Models;
@@ -8,13 +10,15 @@ namespace PontoWeb.Controllers
 {
     public class BatidaController : Controller
     {
+        private readonly BancoContext _bancoContext;
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
         private readonly IBatidaRepositorio _batidaRepositorio;
         private readonly ISessao _sessao;
         
         
-        public BatidaController(IFuncionarioRepositorio funcionarioRepositorio, IBatidaRepositorio batidaRepositorio, ISessao sessao)
+        public BatidaController(BancoContext bancoContext, IFuncionarioRepositorio funcionarioRepositorio, IBatidaRepositorio batidaRepositorio, ISessao sessao)
         {
+            _bancoContext = bancoContext;
             _funcionarioRepositorio = funcionarioRepositorio;
             _batidaRepositorio = batidaRepositorio;
             _sessao = sessao;
@@ -62,6 +66,8 @@ namespace PontoWeb.Controllers
         [PaginaSupervisor]
         public IActionResult Criar()
         {
+            ViewData["FuncionarioMatricula"] = new SelectList(_bancoContext.Funcionarios, "Matricula", "Nome");
+            
             return View();
         }
 
@@ -88,7 +94,7 @@ namespace PontoWeb.Controllers
         {
             BatidaModel batidaDB = _batidaRepositorio.BuscarPorID(batida.Id);
             batidaDB.DataAtualizacao = DateTime.Now;
-            batidaDB.MatriculaEmpregado = batida.MatriculaEmpregado;
+            batidaDB.FuncionarioMatricula = batida.FuncionarioMatricula;
             batidaDB.Registro = batida.Registro;
             batidaDB.TipoBatida = Enums.TipoBatidaEnum.Ajustado;
             batidaDB.Observacao = batida.Observacao;
@@ -142,7 +148,7 @@ namespace PontoWeb.Controllers
                 BatidaModel batida = new BatidaModel
                 {
                     Registro = DateTime.Now,
-                    MatriculaEmpregado = funcionario.Matricula,
+                    FuncionarioMatricula = funcionario.Matricula,
                     TipoBatida = Enums.TipoBatidaEnum.Manual,
                     MatriculaSupervisorAjuste = null,
                     DataCriacao = DateTime.Now,
@@ -157,7 +163,7 @@ namespace PontoWeb.Controllers
         [PaginaSupervisor]
         public IActionResult AjustarBatida(BatidaModel batidaModel)
         {
-            FuncionarioModel funcionario = _funcionarioRepositorio.BuscarPorMatricula(batidaModel.MatriculaEmpregado);
+            FuncionarioModel funcionario = _funcionarioRepositorio.BuscarPorMatricula(batidaModel.FuncionarioMatricula);
             FuncionarioModel supervisor = _sessao.BuscarSessaoFuncionarioLogado();
 
             if (funcionario != null)
@@ -165,7 +171,7 @@ namespace PontoWeb.Controllers
                 BatidaModel batida = new BatidaModel
                 {
                     Registro = batidaModel.Registro,
-                    MatriculaEmpregado = batidaModel.MatriculaEmpregado,
+                    FuncionarioMatricula = batidaModel.FuncionarioMatricula,
                     TipoBatida = Enums.TipoBatidaEnum.Ajustado,
                     Observacao = batidaModel.Observacao,
                     MatriculaSupervisorAjuste = supervisor.Matricula,

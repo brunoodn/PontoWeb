@@ -40,7 +40,7 @@ namespace PontoWeb.Repositorio
 
         public List<BatidaModel> MinhasBatidas(int matricula)
         {
-            return _bancoContext.Batidas.Where(b => (b.MatriculaEmpregado == matricula) && (b.Ativo == true) && (b.Registro.Year == DateTime.Now.Year) && (b.Registro.Month == DateTime.Now.Month)).OrderByDescending(b => b.Registro).ToList();
+            return _bancoContext.Batidas.Where(b => (b.FuncionarioMatricula == matricula) && (b.Ativo == true) && (b.Registro.Year == DateTime.Now.Year) && (b.Registro.Month == DateTime.Now.Month)).OrderByDescending(b => b.Registro).ToList();
         }
 
         public List<BatidaModel> ListaBatidas()
@@ -60,7 +60,7 @@ namespace PontoWeb.Repositorio
                 {
                     foreach(BatidaModel batida in batidasData)
                     {
-                        sw.WriteLine("999999999" + (batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado ? "5" : "3") + batida.Registro.ToString("ddMMyyyyHHmm") + _funcionario.BuscaNIS(batida.MatriculaEmpregado) );
+                        sw.WriteLine("999999999" + (batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado ? "5" : "3") + batida.Registro.ToString("ddMMyyyyHHmm") + _funcionario.BuscaNIS(batida.FuncionarioMatricula) );
                     }
                     
                 }

@@ -7,11 +7,12 @@ namespace PontoWeb.Models
     {
         public int Id { get; set; }
 
+
         [Required(ErrorMessage = "Campo obrigatório..")]
         public DateTime Registro { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório..")]
-        public int MatriculaEmpregado { get; set; }
+        public int FuncionarioMatricula { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório..")]
         public TipoBatidaEnum TipoBatida { get; set; }
@@ -23,5 +24,8 @@ namespace PontoWeb.Models
         public DateTime? DataAtualizacao { get; set; }
 
         public bool Ativo { get; set; } = true;
+
+        /* EF Relations */
+        public FuncionarioModel Funcionario { get; set; }
     }
 }

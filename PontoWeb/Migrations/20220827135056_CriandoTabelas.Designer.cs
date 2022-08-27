@@ -12,8 +12,8 @@ using PontoWeb.Data;
 namespace PontoWeb.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20220730195343_CreateFuncionarioBatidas")]
-    partial class CreateFuncionarioBatidas
+    [Migration("20220827135056_CriandoTabelas")]
+    partial class CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,7 +41,7 @@ namespace PontoWeb.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MatriculaEmpregado")
+                    b.Property<int>("FuncionarioMatricula")
                         .HasColumnType("int");
 
                     b.Property<int?>("MatriculaSupervisorAjuste")
@@ -57,6 +57,8 @@ namespace PontoWeb.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FuncionarioMatricula");
 
                     b.ToTable("Batidas");
                 });
@@ -98,6 +100,22 @@ namespace PontoWeb.Migrations
                     b.HasKey("Matricula");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("PontoWeb.Models.BatidaModel", b =>
+                {
+                    b.HasOne("PontoWeb.Models.FuncionarioModel", "Funcionario")
+                        .WithMany("Batidas")
+                        .HasForeignKey("FuncionarioMatricula")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
+            modelBuilder.Entity("PontoWeb.Models.FuncionarioModel", b =>
+                {
+                    b.Navigation("Batidas");
                 });
 #pragma warning restore 612, 618
         }

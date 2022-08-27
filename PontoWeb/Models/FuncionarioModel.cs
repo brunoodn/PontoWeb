@@ -47,5 +47,9 @@ namespace PontoWeb.Models
 
             return novaSenha;
         }
+
+        /* EF Relations */
+        public IEnumerable<BatidaModel> Batidas { get; set; }
+
     }
 }

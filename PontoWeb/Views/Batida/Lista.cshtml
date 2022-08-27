@@ -35,7 +35,7 @@
             @foreach (var batida in Model)
             {
                 <tr>
-                    <td>@batida.MatriculaEmpregado</td>
+                    <td>@batida.FuncionarioMatricula</td>
                     <td>@batida.Registro.ToString("dd/MM/yyyy")  @(batida.TipoBatida == PontoWeb.Enums.TipoBatidaEnum.Ajustado? "*" : "")</td>
                     <td>@batida.Registro.ToString("HH:mm") </td>
                     <td>
