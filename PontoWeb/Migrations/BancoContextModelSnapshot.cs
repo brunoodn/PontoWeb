@@ -46,7 +46,8 @@ namespace PontoWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Observacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("Registro")
                         .HasColumnType("datetime2");
@@ -85,7 +86,8 @@ namespace PontoWeb.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Senha")
                         .IsRequired()

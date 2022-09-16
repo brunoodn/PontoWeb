@@ -18,6 +18,7 @@ namespace PontoWeb.Models
         public TipoBatidaEnum TipoBatida { get; set; }
         public int? MatriculaSupervisorAjuste { get; set; }
 
+        [StringLength(500)]
         public string? Observacao { get; set; }
         public DateTime DataCriacao { get; set; }
 

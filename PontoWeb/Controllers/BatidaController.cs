@@ -66,7 +66,7 @@ namespace PontoWeb.Controllers
         [PaginaSupervisor]
         public IActionResult Criar()
         {
-            ViewData["FuncionarioMatricula"] = new SelectList(_bancoContext.Funcionarios, "Matricula", "Nome");
+            ViewData["FuncionarioMatricula"] = new SelectList(_bancoContext.Funcionarios.Where(f => f.Ativo == true), "Matricula", "Nome");
             
             return View();
         }
@@ -192,7 +192,7 @@ namespace PontoWeb.Controllers
                 return RedirectToAction("Criar", "Batida");
                 
             }
-            return View();
+            return RedirectToAction("Criar", "Batida");
         }
     }
 }

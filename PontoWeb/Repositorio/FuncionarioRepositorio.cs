@@ -38,11 +38,11 @@ namespace PontoWeb.Repositorio
 
             return funcionario.NIS;
         }
-        public string BuscaPorNIS(string nis)
+        public FuncionarioModel BuscaPorNIS(string nis)
         {
             FuncionarioModel funcionario = _bancoContext.Funcionarios.FirstOrDefault(f => f.NIS == nis);
-
-            return funcionario.NIS;
+            
+            return funcionario;
         }
 
         public List<FuncionarioModel> BuscarTodos()

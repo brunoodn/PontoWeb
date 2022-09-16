@@ -18,13 +18,7 @@
 }
 
 <form method="post" asp-controller="Batida" asp-action="AjustarBatida">
-  <!-- 
-    <div class="mb-3">
-    <label for="matricula" class="form-label">Matricula</label>
-    <input asp-for="FuncionarioMatricula" type="text" class="form-control" id="matricula" >
-    @Html.ValidationMessageFor(b => b.FuncionarioMatricula)
-  </div>
-  -->
+
   <div class="mb-3">
 
     <label asp-for="FuncionarioMatricula" class="control-label">Funcionario</label>
@@ -32,6 +26,7 @@
     <select asp-for="FuncionarioMatricula" class ="form-control" asp-items="ViewBag.FuncionarioMatricula">
         <option value="">Selecione um funcionario</option>
     </select>
+    @Html.ValidationMessageFor(b => b.FuncionarioMatricula)
   </div>
 
   <div class="mb-3">

@@ -14,7 +14,7 @@ namespace PontoWeb.Migrations
                 columns: table => new
                 {
                     Matricula = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NIS = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
@@ -37,7 +37,7 @@ namespace PontoWeb.Migrations
                     FuncionarioMatricula = table.Column<int>(type: "int", nullable: false),
                     TipoBatida = table.Column<int>(type: "int", nullable: false),
                     MatriculaSupervisorAjuste = table.Column<int>(type: "int", nullable: true),
-                    Observacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observacao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)

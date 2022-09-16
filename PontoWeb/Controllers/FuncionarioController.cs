@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PontoWeb.Filters;
+using PontoWeb.Helpers;
 using PontoWeb.Models;
 using PontoWeb.Repositorio;
 
@@ -9,10 +10,13 @@ namespace PontoWeb.Controllers
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
+        private readonly ISessao _sessao;
 
-        public FuncionarioController(IFuncionarioRepositorio funcionarioRepositorio)
+        public FuncionarioController(IFuncionarioRepositorio funcionarioRepositorio
+                                    , ISessao sessao)
         {
             _funcionarioRepositorio = funcionarioRepositorio;
+            _sessao = sessao;
         }
         public IActionResult Index()
         {
@@ -29,10 +33,10 @@ namespace PontoWeb.Controllers
         [HttpPost]
         public IActionResult Criar(FuncionarioModel funcionario)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 FuncionarioModel funcionarioDb = _funcionarioRepositorio.BuscarPorMatricula(funcionario.Matricula);
-                string funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
+                FuncionarioModel funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
 
 
                 if (funcionarioDb == null && funcionarioNIS == null)
@@ -44,8 +48,8 @@ namespace PontoWeb.Controllers
                 TempData["MensagemErro"] = "Matricula ou NIS já existe..";
                 return View();
 
-            }
-            return View(funcionario);
+            //}
+            //return View(funcionario);
         }
 
         public IActionResult ConfirmarExclusao(int matricula)
@@ -58,13 +62,20 @@ namespace PontoWeb.Controllers
         public IActionResult Excluir(int matricula)
         {
             FuncionarioModel funcionario = _funcionarioRepositorio.BuscarPorMatricula(matricula);
+            FuncionarioModel funcionarioLogado = _sessao.BuscarSessaoFuncionarioLogado();
             try
             {
-                funcionario.Ativo = false;
-                funcionario.DataAtualizacao = DateTime.Now;
-                _funcionarioRepositorio.Atualizar(funcionario);
-                TempData["MensagemSucesso"] = "Funcionario excluido com sucesso";
+                
+                if (funcionario.Matricula != funcionarioLogado.Matricula)
+                {
+                    funcionario.Ativo = false;
+                    funcionario.DataAtualizacao = DateTime.Now;
+                    _funcionarioRepositorio.Atualizar(funcionario);
+                    TempData["MensagemSucesso"] = "Funcionario excluido com sucesso";
 
+                    return RedirectToAction("Index");
+                }
+                TempData["MensagemErro"] = "Funcionario logado não pode ser excluido..";
                 return RedirectToAction("Index");
             }
             catch (Exception erro)
@@ -90,7 +101,7 @@ namespace PontoWeb.Controllers
             if (ModelState.IsValid)
             {
                 FuncionarioModel funcionarioDb = _funcionarioRepositorio.BuscarPorMatricula(funcionario.Matricula);
-                string funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
+                FuncionarioModel funcionarioNIS = _funcionarioRepositorio.BuscaPorNIS(funcionario.NIS);
 
 
                 if (funcionarioDb == null && funcionarioNIS == null)

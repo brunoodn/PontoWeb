@@ -12,7 +12,7 @@ using PontoWeb.Data;
 namespace PontoWeb.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20220827135056_CriandoTabelas")]
+    [Migration("20220827163313_CriandoTabelas")]
     partial class CriandoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,8 @@ namespace PontoWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Observacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("Registro")
                         .HasColumnType("datetime2");
@@ -87,7 +88,8 @@ namespace PontoWeb.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Senha")
                         .IsRequired()

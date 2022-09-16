@@ -10,6 +10,7 @@ namespace PontoWeb.Models
         public int Matricula { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório..")]
+        [StringLength(200)]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório..")]
 
